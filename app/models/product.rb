@@ -5,18 +5,19 @@ class Product < ApplicationRecord
   validates :price, presence: true
   validates :brand, presence: true
 
-  before_create :creatingmsg
-  def creatingmsg
+  before_create :display_before_create_message
+  after_create :display_after_create_message
+  after_commit :display_after_commit_message
+
+  def display_before_create_message
     puts "Message Before create command from 'before_create' callback."
   end
 
-  after_create :createdmsg
-  def createdmsg
+  def display_after_create_message
     puts "Message after create command from 'after_create' callback."
   end
 
-  after_commit :commitedmsg
-  def commitedmsg
+  def display_after_commit_message
     puts "Message after successful commiting from 'after_commit' callback."
   end
 end
