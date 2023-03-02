@@ -1,0 +1,33 @@
+<div class="container-fluid">
+
+  <h1 class="text-center">Product #<%= @product.id %></h1>
+  <br><hr>
+
+  <h5>
+    <strong>Title: </strong>
+    <%= @product.title %>
+  </h5><hr>
+
+  <h5>
+    <strong>Description: </strong>
+    <%= @product.description %>
+  </h5><hr>
+
+  <h5>
+    <strong>Category: </strong>
+    <%= @product.category %>
+  </h5><hr>
+
+  <h5>
+    <strong>Price: </strong>
+    <%= @product.price %>
+  </h5><hr>
+
+  <h5>
+    <strong>Brand: </strong>
+    <%= @product.brand %>
+  </h5><hr>
+  
+  <%= link_to "Back", "/products" %>
+
+</div>
