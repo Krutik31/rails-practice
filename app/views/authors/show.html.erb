@@ -1,0 +1,44 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <table class="table table-hover text-center">
+        <thead>
+          <tr>
+            <th colspan="2"><h4><%= @author.first_name %> <%= @author.last_name %></h4></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Firstname</th>
+            <td><%= @author.first_name %></td>
+          </tr>
+          <tr>
+            <th>Lastname</th>
+            <td><%= @author.last_name %></td>
+          </tr>
+          <tr>
+            <th>Date of Birth</th>
+            <td><%= @author.date_of_birth %></td>
+          </tr>
+          <tr>
+            <th>Email ID</th>
+            <td><%= @author.email %></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="row">
+        <div class="col-6">
+          <%= link_to "View Books", author_books_path(@author), class:"btn btn-sm btn-success float-left" %>
+        </div>
+        <div class="col-6">
+          <%= link_to "Back", authors_path, class:"btn btn-sm btn-danger float-right" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-3"></div>
+  </div>
+
+</div>
