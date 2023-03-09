@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: practicedb
+  database: practicedb_dev
   pool: 5
   host: localhost
   username: krutik
@@ -10,7 +10,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: practicedb
+  database: practicedb_test
   pool: 5
   username: krutik
   password: 123

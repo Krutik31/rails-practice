@@ -1,0 +1,26 @@
+<%= form_with model: book, url: url do |form| %>
+  <div class="form-group">
+    <%= form.label :name %><br>
+    <%= form.text_field :name, class:"form-control", placeholder:"Enter bookname" %>
+    
+    <%= render :partial => "error_message", locals: { book: book, field: :name } %>
+
+  </div>
+
+  <div class="form-group">
+    <%= form.label :price %><br>
+    <%= form.text_field :price, class:"form-control", placeholder:"Enter Price" %>
+    
+    <%= render :partial => "error_message", locals: { book: book, field: :price } %>
+
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <%= form.submit value:"#{submit_btn}", class:"btn btn-sm btn-success float-left" %>
+    </div>
+    <div class="col-6">
+      <%= link_to "Back", author_books_path(author), class:"btn btn-sm btn-danger float-right" %>
+    </div>
+  </div>
+<% end %>

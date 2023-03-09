@@ -1,0 +1,19 @@
+<div class="container-fluid">
+
+  <h2 class="text-center">Update Book Informations</h2>
+  <h3 class="text-center">(<%= @book.name %>)</h3>
+
+  <div class="row">
+    <div class="col-3">
+    </div>
+    <div class="col-6">
+      <hr>
+      
+      <%= render :partial => "form", locals: { book: @book, author: @author, url: author_book_path(@author), submit_btn: "Update Book" } %>
+
+    </div>
+    <div class="col-3">
+    </div>
+  </div>
+  
+</div>
