@@ -5,12 +5,15 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = Book.new
     @author = Author.find(params[:author_id])
+    @book = @author.books.new
   end
 
   def create
-    if Book.find_or_create_by(name: book_params[:name], price: book_params[:price], author_id: params[:author_id])
+    @author = Author.find(params[:author_id])
+    @book = @author.books.new(book_params)
+
+    if @book.save
       redirect_to author_books_path(params[:author_id])
     else
       render :new, status: :unprocessable_entity

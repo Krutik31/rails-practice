@@ -8,7 +8,7 @@
     <div class="col-6">
       <hr>
       
-      <%= render :partial => "form", locals: { book: @book, author: @author, url: author_books_path(@author), submit_btn: "Create Book" } %>
+      <%= render partial: "form", locals: { book: @book, author: @author, url: author_books_path(@author), submit_btn: "Create Book" } %>
       
     </div>
     <div class="col-3">

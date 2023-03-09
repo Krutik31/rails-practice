@@ -1,4 +1,6 @@
 class Author < ApplicationRecord
+  has_many :books, dependent: :destroy
+  
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :date_of_birth, presence: true
@@ -16,7 +18,5 @@ class Author < ApplicationRecord
     return if (self.date_of_birth.blank?)
     (Date.parse(self.date_of_birth.to_s) >= Date.today) || (Date.parse(self.date_of_birth.to_s) <= Date.parse("01-01-1950"))
   end
-
-  has_many :books, dependent: :destroy
 
 end

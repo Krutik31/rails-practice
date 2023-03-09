@@ -9,7 +9,7 @@
     <div class="col-6">
       <hr>
       
-      <%= render :partial => "form", locals: { book: @book, author: @author, url: author_book_path(@author), submit_btn: "Update Book" } %>
+      <%= render partial: "form", locals: { book: @book, author: @author, url: author_book_path(@author), submit_btn: "Update Book" } %>
 
     </div>
     <div class="col-3">
