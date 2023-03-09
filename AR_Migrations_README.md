@@ -112,7 +112,15 @@ In Author model class, I have added validations which validates the range of bir
 
 ### Task 11: Implement CRUD for all these tables using VIEW. Display data accordingly.
 
+![Screenshot from 2023-03-09 12-06-11](https://user-images.githubusercontent.com/124874665/223940738-f58f9719-3899-41f2-9bf4-5f8435166976.png)
 
+![Screenshot from 2023-03-09 12-06-22](https://user-images.githubusercontent.com/124874665/223940762-6bfaf290-6c89-4410-820b-7d9256655a0e.png)
+
+![Screenshot from 2023-03-09 12-06-46](https://user-images.githubusercontent.com/124874665/223940783-34dc1ce4-b230-4659-9676-e9b92b650d2f.png)
+
+![Screenshot from 2023-03-09 12-07-15](https://user-images.githubusercontent.com/124874665/223940799-1e4181da-6e86-47dc-86f8-cecb475465c7.png)
+
+![Screenshot from 2023-03-09 12-07-31](https://user-images.githubusercontent.com/124874665/223940812-01739af4-35f1-4ecb-9daa-283cb20e03fd.png)
 
 
 ### Task 12: Rename the column to dob to date_of_birth using reversible migrations.
@@ -131,4 +139,3 @@ For creating SQL file of schema using schema dumping, we have to set 'config.act
 >>> Visit 'config/application.rb'.
 
 ```
-
