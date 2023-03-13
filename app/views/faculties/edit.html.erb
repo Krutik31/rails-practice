@@ -8,17 +8,18 @@
     </div>
     <div class="col-6">
 
-      <% if @faculty.errors.any? %>
+    <% if @faculty.errors.any? %>
       <hr>
-        <div style="color:red;">
-          <h5><%= @faculty.errors.count %> errors found.</h5>
-          <ul>
-            <% @faculty.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+      
+      <div style="color:red;">
+        <h5><%= @faculty.errors.count %> errors found.</h5>
+        <ul>
+          <% @faculty.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
       <hr>
       

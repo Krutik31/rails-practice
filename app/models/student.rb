@@ -16,7 +16,7 @@ class Student < ApplicationRecord
   end
 
   def check_date?
-    return if (self.dob.blank?)
-    (Date.parse(self.dob.to_s) > Date.today)
+    return if self.dob.blank?
+    Date.parse(self.dob.to_s) > Date.today
   end
 end
