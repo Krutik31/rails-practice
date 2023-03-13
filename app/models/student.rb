@@ -1,5 +1,4 @@
 class Student < ApplicationRecord
-  DEPTS = {"Select Department": "nil", "Information Technology": "IT", "Computer Engineering": "CE"}
 
   validates :first_name, :last_name, presence: true
 
@@ -9,6 +8,8 @@ class Student < ApplicationRecord
 
   validates :terms_of_usage, acceptance: { message: "You cannot proceed without accepting Terms of Usage" }
 
+  DEPTS = {"Select Department": "nil", "Information Technology": "IT", "Computer Engineering": "CE"}
+  
   private
 
   def validate_date_of_birth
@@ -16,7 +17,8 @@ class Student < ApplicationRecord
   end
 
   def check_date?
-    return if self.dob.blank?
-    Date.parse(self.dob.to_s) > Date.today
+    return if dob.blank?
+
+    Date.parse(dob.to_s) > Date.today
   end
 end
