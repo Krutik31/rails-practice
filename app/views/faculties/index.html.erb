@@ -1,0 +1,43 @@
+<div class="container-fluid text-center">
+  <br>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th colspan="4"><h3>List of Faculties</h3></th>
+          </tr>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Designation</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @faculties.each do |faculty| %>
+            <tr>
+              <td><%= faculty.id %></td>
+              <td><%= faculty.first_name %> <%= faculty.last_name %></td>
+              <td><%= faculty.designation %></td>
+              <td>
+                <%= link_to "View", faculty_path(faculty), class:"btn btn-success btn-sm" %>
+                &nbsp;&nbsp;
+                <%= link_to "Edit", edit_faculty_path(faculty), class:"btn btn-warning btn-sm" %>
+                &nbsp;&nbsp;
+                <%= link_to "Destroy", faculty_path(faculty), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"btn btn-danger btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="row col-12 justify-content-center"> 
+        <%= link_to "Add new Faculty", new_faculty_path(), class:"btn btn-primary float-left" %>
+        &nbsp;&nbsp;
+        <%= link_to "Students", students_path(), class:"btn btn-dark float-left" %>
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>

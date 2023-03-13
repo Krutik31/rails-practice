@@ -1,0 +1,43 @@
+<div class="container-fluid text-center">
+  <br>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th colspan="4"><h3>List of Students</h3></th>
+          </tr>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @students.each do |student| %>
+            <tr>
+              <td><%= student.id %></td>
+              <td><%= student.first_name %> <%= student.last_name %></td>
+              <td><%= student.department %></td>
+              <td>
+                <%= link_to "View", student_path(student), class:"btn btn-success btn-sm" %>
+                &nbsp;&nbsp;
+                <%= link_to "Edit", edit_student_path(student), class:"btn btn-warning btn-sm" %>
+                &nbsp;&nbsp;
+                <%= link_to "Destroy", student_path(student), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"btn btn-danger btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="row col-12 justify-content-center"> 
+        <%= link_to "Add new Student", new_student_path(), class:"btn btn-primary float-left" %>
+        &nbsp;&nbsp;
+        <%= link_to "Faculties", faculties_path(), class:"btn btn-dark float-left" %>
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>
