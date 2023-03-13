@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <br>
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+          <tr>
+            <th colspan="2"><h4><%= @student.first_name %> <%= @student.last_name %></h4></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Firstname</th>
+            <td><%= @student.first_name %></td>
+          </tr>
+          <tr>
+            <th>Lastname</th>
+            <td><%= @student.last_name %></td>
+          </tr>
+          <tr>
+            <th>Date of Birth</th>
+            <td><%= @student.dob %></td>
+          </tr>
+          <tr>
+            <th>Department</th>
+            <td><%= @student.department %></td>
+          </tr>
+          <tr>
+            <th>Phone number</th>
+            <td><%= @student.phone_number %></td>
+          </tr>
+          <tr>
+            <th>Email ID</th>
+            <td><%= @student.email %></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="row">
+        <div class="col-12">
+          <%= link_to "Back", students_path, class:"btn btn-sm btn-danger float-right" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-3"></div>
+  </div>
+
+</div>
