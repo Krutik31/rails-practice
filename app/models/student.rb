@@ -1,15 +1,14 @@
 class Student < ApplicationRecord
-
   validates :first_name, :last_name, presence: true
 
   validate :validate_date_of_birth, if: :check_date?
 
-  validates :department, inclusion: {in: ["IT", "CE"], message: "can't be %{value}."}
+  validates :department, inclusion: { in: %w[IT CE], message: "can't be %<value>." }
 
-  validates :terms_of_usage, acceptance: { message: "You cannot proceed without accepting Terms of Usage" }
+  validates :terms_of_usage, acceptance: { message: 'You cannot proceed without accepting Terms of Usage' }
 
-  DEPTS = {"Select Department": "nil", "Information Technology": "IT", "Computer Engineering": "CE"}
-  
+  DEPTS = { 'Select Department': 'nil', 'Information Technology': 'IT', 'Computer Engineering': 'CE' }.freeze
+
   private
 
   def validate_date_of_birth

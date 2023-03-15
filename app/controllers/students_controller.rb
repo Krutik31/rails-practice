@@ -15,7 +15,7 @@ class StudentsController < ApplicationController
     @student = Student.new(student_params)
 
     if @student.save
-      redirect_to action: "index"
+      redirect_to students_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
 
     if @student.update(student_params)
-      redirect_to @student
+      redirect_to student_path(params[:id])
     else
       render :edit, status: :unprocessable_entity
     end
@@ -39,11 +39,11 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
     @student.destroy
 
-    redirect_to @student
+    redirect_to students_path
   end
 
   private
-  
+
   def student_params
     params.require(:student).permit(:first_name, :last_name, :dob, :department, :phone_number, :email, :terms_of_usage)
   end

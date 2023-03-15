@@ -15,7 +15,7 @@ class AuthorsController < ApplicationController
     @author = Author.new(author_params)
 
     if @author.save
-      redirect_to action: "index"
+      redirect_to authors_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class AuthorsController < ApplicationController
     @author = Author.find(params[:id])
 
     if @author.update(author_params)
-      redirect_to @author
+      redirect_to authors_path
     else
       render :edit, status: :unprocessable_entity
     end
@@ -39,7 +39,7 @@ class AuthorsController < ApplicationController
     @author = Author.find(params[:id])
     @author.destroy
 
-    redirect_to @author
+    redirect_to authors_path
   end
 
   private

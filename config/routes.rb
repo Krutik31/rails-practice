@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  
-  get '/home/', to: "home#index"
-  resources :products, only: [:index, :show]
+  get '/home/', to: 'home#index'
+
+  resources :products, only: %i[index show]
 
   resources :authors do
     resources :books
@@ -10,5 +10,4 @@ Rails.application.routes.draw do
   resources :students
 
   resources :faculties
-  
 end
