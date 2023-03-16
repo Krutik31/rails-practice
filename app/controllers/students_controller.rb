@@ -1,17 +1,21 @@
 class StudentsController < ApplicationController
   def index
+    create_callback_hash('all')
     @students = Student.all.order(id: :asc)
   end
 
   def show
+    create_callback_hash('show')
     @student = Student.find(params[:id])
   end
 
   def new
+    create_callback_hash('new')
     @student = Student.new
   end
 
   def create
+    create_callback_hash('create')
     @student = Student.new(student_params)
 
     if @student.save
@@ -22,10 +26,12 @@ class StudentsController < ApplicationController
   end
 
   def edit
+    create_callback_hash('edit')
     @student = Student.find(params[:id])
   end
 
   def update
+    create_callback_hash('update')
     @student = Student.find(params[:id])
 
     if @student.update(student_params)
@@ -36,6 +42,7 @@ class StudentsController < ApplicationController
   end
 
   def destroy
+    create_callback_hash('destroy')
     @student = Student.find(params[:id])
     @student.destroy
 
