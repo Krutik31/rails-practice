@@ -1,0 +1,21 @@
+<% if %w[faculties students].any? { |i| i == controller.controller_name } %>
+  <br>
+  <div data-controller="clearcallback">
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6 rounded" style="border: 3px solid #007fff!important" data-clearcallback-target="hideable">
+          <h3 class="text-primary text-center">-: Callbacks :-</h3>
+          <% $callback.each do |k, v| %>
+            <hr><h5><strong><%= k %> method:</strong></h5>
+            <ul>
+              <% $callback[k].each do |value| %>
+                <li><%= value.keys[0] %> : <%= value.values[0] %></li>
+              <% end %>
+            </ul>
+          <% end %>
+          <a class="btn btn-sm btn-outline-primary float-right" data-action="clearcallback#clear"><strong>Clear</strong></a>  
+      </div>
+      <div class="col-3"></div>
+    </div>
+  </div>
+<% end %>

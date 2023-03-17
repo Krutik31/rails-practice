@@ -1,21 +1,21 @@
 class FacultiesController < ApplicationController
   def index
-    create_callback_hash('all')
+    create_callback_hash
     @faculties = Faculty.all.order(id: :asc)
   end
 
   def show
-    create_callback_hash('show')
+    create_callback_hash
     @faculty = Faculty.find(params[:id])
   end
 
   def new
-    create_callback_hash('new')
+    create_callback_hash
     @faculty = Faculty.new
   end
 
   def create
-    create_callback_hash('create')
+    create_callback_hash
     @faculty = Faculty.new(faculty_params)
 
     if @faculty.save
@@ -26,12 +26,12 @@ class FacultiesController < ApplicationController
   end
 
   def edit
-    create_callback_hash('edit')
+    create_callback_hash
     @faculty = Faculty.find(params[:id])
   end
 
   def update
-    create_callback_hash('update')
+    create_callback_hash
     @faculty = Faculty.find(params[:id])
 
     if @faculty.update(faculty_params)
@@ -42,7 +42,7 @@ class FacultiesController < ApplicationController
   end
 
   def destroy
-    create_callback_hash('destroy')
+    create_callback_hash
     @faculty = Faculty.find(params[:id])
     @faculty.destroy
 

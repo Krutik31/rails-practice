@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
   $callback = {}
-  def create_callback_hash(method)
+  def create_callback_hash
     if %w[update destroy create].any? { |i| i == $callback.keys.last }
-      $callback[method] = []
+      $callback[action_name] = []
     else
-      $callback = { method => [] }
+      $callback = { action_name => [] }
     end
   end
 end
