@@ -19,7 +19,7 @@ class StudentsController < ApplicationController
     @student = Student.new(student_params)
 
     if @student.save
-      redirect_to student_path(@student.id)
+      redirect_to student_path(@student)
     else
       render :new, status: :unprocessable_entity
     end
@@ -35,7 +35,7 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
 
     if @student.update(student_params)
-      redirect_to student_path(params[:id])
+      redirect_to student_path(@student)
     else
       render :edit, status: :unprocessable_entity
     end

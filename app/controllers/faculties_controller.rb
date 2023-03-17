@@ -19,7 +19,7 @@ class FacultiesController < ApplicationController
     @faculty = Faculty.new(faculty_params)
 
     if @faculty.save
-      redirect_to faculties_path
+      redirect_to faculty_path(@faculty)
     else
       render :new, status: :unprocessable_entity
     end
@@ -35,7 +35,7 @@ class FacultiesController < ApplicationController
     @faculty = Faculty.find(params[:id])
 
     if @faculty.update(faculty_params)
-      redirect_to faculty_path(params[:id])
+      redirect_to faculty_path(@faculty)
     else
       render :edit, status: :unprocessable_entity
     end
