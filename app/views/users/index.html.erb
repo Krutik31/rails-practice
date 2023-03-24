@@ -1,0 +1,35 @@
+<div class="text-center">
+  <br>
+  <div class="w-50 bg-dark mx-auto text-light">
+    <%=flash[:notice]%>
+  </div>
+
+  <% unless logged_in? %>
+
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <h1>Login</h1>
+        <%= form_tag (users_path) do %>
+          <div class="input-group mb-3">
+            <label class="input-group-text" >Username</label>
+            <br />
+            <%= text_field_tag :username, nil, class: 'form-control' %>
+          </div>
+          
+          <div class="input-group mb-3">
+            <label class='input-group-text' >Password</label>
+            <br />
+            <%= password_field_tag :password, nil, class: 'form-control' %>
+          </div>
+          
+          <div class="input-group mb-3">
+            <%= submit_tag :login, class: 'btn-success rounded p-1 px-2' %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-3"></div>
+    </div>
+
+  <% end %>
+</div>
