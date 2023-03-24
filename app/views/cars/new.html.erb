@@ -7,18 +7,8 @@
     </div>
     <div class="col-6">
       <%= render partial: "logout" %>
-      <% if @car.errors.any? %>
-        <hr>
-        
-        <div style="color:red;">
-          <h5><%= @car.errors.count %> errors found.</h5>
-          <ul>
-            <% @car.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+      
+      <%= render partial: "error_message" %>
 
       <hr>
       <%= render partial: "form", locals: { car: @car, submit_btn: "Create Car" } %>

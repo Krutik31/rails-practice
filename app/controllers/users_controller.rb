@@ -1,10 +1,15 @@
 class UsersController < ApplicationController
   http_basic_authenticate_with name: 'user', password: '123'
 
-  def index; end
+  def index
+    return unless logged_in?
+
+    flash[:notice] = 'You are already logged in.'
+    redirect_to cars_path
+  end
 
   def create
-    @user = User.where(username: params[:username]).where(password: params[:password]).first
+    @user = User.where(user_params).first
     if @user
       session[:current_user_id] = @user[:id]
       flash[:notice] = 'You have successfully logged in.'
@@ -16,7 +21,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
+  def logout
     session.delete(:current_user_id)
     flash[:notice] = 'You have successfully logged out.'
     redirect_to users_path
@@ -25,6 +30,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :password)
+    params.permit(:username, :password)
   end
 end

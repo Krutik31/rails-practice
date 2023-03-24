@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :faculties
 
   resources :users, only: %i[index create destroy]
+  get '/user/logout', to: 'users#logout'
 
   resources :cars
   get '/car/search', to: 'cars#search'
