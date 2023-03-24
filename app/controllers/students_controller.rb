@@ -1,21 +1,19 @@
 class StudentsController < ApplicationController
+  before_action :create_callback_hash_filter
+
   def index
-    create_callback_hash
     @students = Student.all.order(id: :asc)
   end
 
   def show
-    create_callback_hash
     @student = Student.find(params[:id])
   end
 
   def new
-    create_callback_hash
     @student = Student.new
   end
 
   def create
-    create_callback_hash
     @student = Student.new(student_params)
 
     if @student.save
@@ -26,12 +24,10 @@ class StudentsController < ApplicationController
   end
 
   def edit
-    create_callback_hash
     @student = Student.find(params[:id])
   end
 
   def update
-    create_callback_hash
     @student = Student.find(params[:id])
 
     if @student.update(student_params)
@@ -42,7 +38,6 @@ class StudentsController < ApplicationController
   end
 
   def destroy
-    create_callback_hash
     @student = Student.find(params[:id])
     @student.destroy
 
@@ -50,6 +45,10 @@ class StudentsController < ApplicationController
   end
 
   private
+
+  def create_callback_hash_filter
+    create_callback_hash
+  end
 
   def student_params
     params.require(:student).permit(:first_name, :last_name, :dob, :department, :phone_number, :email, :terms_of_usage)

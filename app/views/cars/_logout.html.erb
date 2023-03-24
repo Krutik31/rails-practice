@@ -1,0 +1,12 @@
+<div class="w-50 bg-dark mx-auto text-light">
+  <%=flash[:notice]%>
+</div>
+<div class="row">
+  <div class="col-6 text-left">
+    <h4>Hello <%=cookies[:user_name].titleize%> (<%= link_to "download pdf", download_pdf_path %>) </h4>
+  </div>
+  <div class="col-6">
+    <%= link_to "Logout", '/user/logout', class:"btn btn-danger float-right" %>
+  </div>
+</div>
+<br>
