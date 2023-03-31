@@ -1,0 +1,102 @@
+<div class="container-fluid text-center">
+  <br>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>Profile Details</h3></th>
+          </tr>
+        </thead>
+          <tr>
+            <th>Firstname</th>
+            <td><%= @profile.firstname %></td>
+          </tr>
+          <tr>
+            <th>Lastname</th>
+            <td><%= @profile.lastname %></td>
+          </tr>
+          <tr>
+            <th>Phone Number</th>
+            <td><%= @profile.phonenumber %></td>
+          </tr>
+      </table>
+
+      <div class="row col-12 justify-content-center"> 
+        <%= link_to "Edit Profile", edit_profile_path(@profile.id), class:"btn btn-sm btn-warning float-left" %>
+      </div>
+
+      <hr>
+
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th colspan="2"><h3>User Address</h3></th>
+          </tr>
+        </thead>
+          <tr>
+            <th>Address Line 1</th>
+            <td><%= @address.address_line1 %></td>
+          </tr>
+          <tr>
+            <th>Address Line 1</th>
+            <td><%= @address.address_line2 %></td>
+          </tr>
+          <tr>
+            <th>City</th>
+            <td><%= @address.city %></td>
+          </tr>
+          <tr>
+            <th>Pincode</th>
+            <td><%= @address.pincode %></td>
+          </tr>
+      </table>
+
+      <div class="row col-12 justify-content-center"> 
+        <%= link_to "Edit Address", edit_address_path(@address.id), class:"btn btn-sm btn-info float-left" %>
+      </div>
+
+      <hr>
+
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th colspan="6"><h3>Enrolled Events</h3></th>
+          </tr>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Event Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% n = 1 %>
+          <% @events.each do |event| %>
+            <tr>
+              <td><%= n %></td>
+              <td><%= event.name %></td>
+              <td><%= event.description %></td>
+              <td><%= event.category.category_name %></td>
+              <td><%= event.event_date %></td>
+              <td>
+                <%= link_to "Comments", show_comments_path(event.id), class:"btn btn-dark btn-sm" %>
+                <%= link_to "Discard", discard_enrollment_path(event.id), class:"btn btn-danger btn-sm" %>
+              </td>
+            </tr>
+            <% n +=1 %>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="row col-12 justify-content-center"> 
+        <%= link_to "Back", users_path, class:"btn btn-sm btn-danger float-left" %>
+      </div>
+
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>

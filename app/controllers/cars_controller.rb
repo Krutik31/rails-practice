@@ -1,7 +1,7 @@
 class CarsController < ApplicationController
-  USERS = { 'admin' => '123' }
+  # USERS = { 'admin' => '123' }
 
-  before_action :authenticate
+  # before_action :authenticate
   before_action :login_checkup, except: %i[destroy]
   before_action :find_car, only: %i[show edit update destroy]
 

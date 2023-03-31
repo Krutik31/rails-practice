@@ -1,0 +1,72 @@
+<div class="container-fluid text-center">
+  <br>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>
+              <div class="row">
+                <div class="col-10 h4 text-left">
+                  <%= @event.name %>
+                </div>
+                <div class="col-2">
+                  <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#addcomment">
+                    Add comment
+                  </button>
+                </div>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @comments.each do |comment| %>
+            <tr>
+              <td class="text-left">
+                  <strong>User:</strong> <%= comment.user.username.titleize %>
+                  <br>
+                  <strong>At:</strong> <%= comment.created_at %>
+                  <br>
+                  <strong>Comment:</strong> <%= comment.comment %>
+                  <br>
+                  <% if comment.likes.pluck(:user_id).include?(session[:current_user_id]) %>
+                    <%= link_to "Liked (#{comment.likes.count})", unlike_comments_path(comment.id) %>
+                  <% else %>
+                    <%= link_to "Like (#{comment.likes.count})", like_comments_path(comment.id) %>
+                  <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="modal fade" id="addcomment">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title"><%= @event.name %></h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+              <%= form_with url: add_comments_path(@event.id), method: :get do |form| %>
+                <div class="form-group">
+                  <%= form.text_area :comment, class:"form-control", placeholder:"write your comment...", rows:5 %>
+                </div>
+                <%= form.submit value:"comment", class:"btn btn-sm btn-success float-right" %>
+                <% end %>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>

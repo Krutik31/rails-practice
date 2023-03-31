@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="col-6 text-left">
+    <h4>Hello <%=cookies[:user_name].titleize%></h4>
+  </div>
+  <div class="col-6">
+    <%= link_to "Logout", '/user/logout', class:"btn btn-danger float-right" %>
+  </div>
+</div>

@@ -8,6 +8,19 @@
 
 Author.all.each do |author|
   5.times do |i|
-    author.books.find_or_create_by(name: "Book#{i+10} by #{author.first_name}", price: 650)
+    author.books.find_or_create_by(name: "Book#{i + 10} by #{author.first_name}", price: 650)
   end
+end
+
+users = %w[admin krutik dhyey nil]
+lastname = %w[admin patel sapara patel]
+phonenumber = %w[1111122222 3333344444 5555566666 7777788888]
+category = %w[Music Celebration Film Fashion]
+
+4.times do |i|
+  User.find_or_create_by(username: users[i], password: '123')
+  Profile.find_or_create_by(firstname: users[i], lastname: lastname[i], phonenumber: phonenumber[i], user_id: i + 1)
+  Address.find_or_create_by(address_line1: 'address_line1', address_line2: 'address_line2', city: 'Ahmedabad',
+                            pincode: '383001', user_id: i + 1)
+  Category.find_or_create_by(category_name: category[i])
 end
