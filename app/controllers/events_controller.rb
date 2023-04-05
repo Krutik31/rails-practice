@@ -1,13 +1,12 @@
 class EventsController < ApplicationController
   before_action :login_checkup, except: %i[destroy]
-  before_action :find_event, only: %i[show edit update destroy]
+  before_action :fetch_event, only: %i[show edit update destroy]
   before_action :all_events, only: %i[index search]
-  before_action :find_category, only: %i[new edit index search]
+  before_action :fetch_category, only: %i[new edit index search]
 
   def index; end
 
-  def show
-  end
+  def show; end
 
   def new
     @event = Event.new
@@ -15,9 +14,8 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-
+    @event.user = current_user
     if @event.save
-      Enrollment.create(event_id: @event.id, user_id: session[:current_user_id], created: true)
       redirect_to event_path(@event)
     else
       render :new, status: :unprocessable_entity
@@ -54,18 +52,16 @@ class EventsController < ApplicationController
     redirect_to users_path
   end
 
-  def find_event
-    @event = Event.find_by(id: Enrollment.where(user_id: session[:current_user_id],
-                                                event_id: params[:id]).pluck(:event_id))
+  def fetch_event
+    @event = current_user.events.find(params[:id])
   end
 
-  def find_category
+  def fetch_category
     @categories = Category.all
   end
 
   def all_events
-    @events = Event.where(id: Enrollment.where(user_id: session[:current_user_id],
-                                               created: true).pluck(:event_id)).order(id: :desc)
+    @events = current_user.enrollments.has_ownership.extract_associated(:event)
   end
 
   def event_params

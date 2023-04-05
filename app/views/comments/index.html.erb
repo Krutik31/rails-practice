@@ -31,10 +31,11 @@
                   <br>
                   <strong>Comment:</strong> <%= comment.comment %>
                   <br>
-                  <% if comment.likes.pluck(:user_id).include?(session[:current_user_id]) %>
-                    <%= link_to "Liked (#{comment.likes.count})", unlike_comments_path(comment.id) %>
+                  <% like_counts = comment.likes.count %>
+                  <% if liked_comment?(comment.id, current_user) %>
+                    <%= link_to "Liked (#{like_counts})", unlike_comments_path(comment.id) %>
                   <% else %>
-                    <%= link_to "Like (#{comment.likes.count})", like_comments_path(comment.id) %>
+                    <%= link_to "Like (#{like_counts})", like_comments_path(comment.id) %>
                   <% end %>
               </td>
             </tr>
@@ -42,29 +43,7 @@
         </tbody>
       </table>
 
-      <div class="modal fade" id="addcomment">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content">
-          
-            <!-- Modal Header -->
-            <div class="modal-header">
-              <h4 class="modal-title"><%= @event.name %></h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            
-            <!-- Modal body -->
-            <div class="modal-body">
-              <%= form_with url: add_comments_path(@event.id), method: :get do |form| %>
-                <div class="form-group">
-                  <%= form.text_area :comment, class:"form-control", placeholder:"write your comment...", rows:5 %>
-                </div>
-                <%= form.submit value:"comment", class:"btn btn-sm btn-success float-right" %>
-                <% end %>
-            </div>
-            
-          </div>
-        </div>
-      </div>
+      <%= render partial: "modal" %>
 
     </div>
     <div class="col-2"></div>

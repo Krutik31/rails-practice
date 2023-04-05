@@ -18,7 +18,7 @@ phonenumber = %w[1111122222 3333344444 5555566666 7777788888]
 category = %w[Music Celebration Film Fashion]
 
 4.times do |i|
-  User.find_or_create_by(username: users[i], password: '123')
+  User.find_or_create_by(id: i + 1, username: users[i], password: '123')
   Profile.find_or_create_by(firstname: users[i], lastname: lastname[i], phonenumber: phonenumber[i], user_id: i + 1)
   Address.find_or_create_by(address_line1: 'address_line1', address_line2: 'address_line2', city: 'Ahmedabad',
                             pincode: '383001', user_id: i + 1)

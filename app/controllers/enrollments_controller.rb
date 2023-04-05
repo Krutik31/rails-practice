@@ -2,13 +2,12 @@ class EnrollmentsController < ApplicationController
   before_action :login_checkup
 
   def index
-    @enrolled_events = Enrollment.where(user_id: session[:current_user_id], created: false).pluck(:event_id)
-    @events = Event.find(Enrollment.where(created: true).where.not(user_id: session[:current_user_id]).pluck(:event_id))
+    @enrolled_event_ids = current_user.enrollments.has_not_ownership.pluck(:event_id)
+    @events = Enrollment.has_ownership.where.not(user_id: 1).extract_associated(:event)
   end
 
   def create
-    @enrollment = Enrollment.new(event_id: params[:eventid], user_id: session[:current_user_id],
-                                 created: false)
+    @enrollment = current_user.enrollments.new(event_id: params[:eventid], is_owner: false)
     if @enrollment.save
       flash[:notice] = 'You have successfully enrolled.'
       redirect_to enrollments_path
@@ -18,8 +17,7 @@ class EnrollmentsController < ApplicationController
   end
 
   def discard
-    @enrollment = Enrollment.find_by(event_id: params[:eventid], user_id: session[:current_user_id],
-                                     created: false)
+    @enrollment = current_user.enrollments.has_not_ownership.find_by(event_id: params[:eventid])
     @enrollment.destroy
 
     redirect_to profiles_path

@@ -1,8 +1,8 @@
 class ProfilesController < ApplicationController
-  before_action :find_profile
+  before_action :fetch_profile
 
   def index
-    @events = Event.find(Enrollment.where(user_id: session[:current_user_id], created: false).pluck(:event_id))
+    @events = current_user.enrollments.has_not_ownership.extract_associated(:event)
     @address = Address.find_by(user_id: session[:current_user_id])
   end
 
@@ -18,8 +18,8 @@ class ProfilesController < ApplicationController
 
   private
 
-  def find_profile
-    @profile = Profile.where(user_id: session[:current_user_id]).first
+  def fetch_profile
+    @profile = current_user.profile
   end
 
   def profile_params

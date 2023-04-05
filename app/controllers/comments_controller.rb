@@ -2,12 +2,12 @@ class CommentsController < ApplicationController
   before_action :login_checkup
 
   def index
-    @comments = Comment.where(event_id: params[:id])
     @event = Event.find(params[:id])
+    @comments = @event.comments
   end
 
   def add_comment
-    @comment = Comment.new(event_id: params[:id], user_id: session[:current_user_id], comment: params[:comment])
+    @comment = current_user.comments.new(event_id: params[:id], comment: comment_params[:commenttext])
 
     return unless @comment.save
 
@@ -15,13 +15,13 @@ class CommentsController < ApplicationController
   end
 
   def like_comment
-    like = Like.find_or_create_by(user_id: session[:current_user_id], comment_id: params[:id])
+    like = current_user.likes.find_or_create_by(comment_id: params[:id])
     eventid = like.comment.event_id
     redirect_to show_comments_path(eventid)
   end
 
   def unlike_comment
-    @like = Like.find_by(user_id: session[:current_user_id], comment_id: params[:id])
+    @like = current_user.likes.find_by(comment_id: params[:id])
     eventid = @like.comment.event_id
     @like.destroy
     redirect_to show_comments_path(eventid)
@@ -34,5 +34,9 @@ class CommentsController < ApplicationController
 
     flash[:notice] = 'You have to first login.'
     redirect_to users_path
+  end
+
+  def comment_params
+    params.require(:comment).permit(:commenttext)
   end
 end

@@ -22,11 +22,11 @@
           </tr>
         </thead>
         <tbody>
-          <% n = 1 %>
+          <% count = 1 %>
           <% @events.each do |event| %>
-            <% unless @enrolled_events.include?(event.id) %>
+            <% unless @enrolled_event_ids.include?(event.id) %>
               <tr>
-                <td><%= n %></td>
+                <td><%= count %></td>
                 <td><%= event.name %></td>
                 <td><%= event.description %></td>
                 <td><%= event.category.category_name %></td>
@@ -37,7 +37,7 @@
                   <%= link_to "Enroll", create_enrollment_path(event.id), class:"btn btn-success btn-sm" %>
                 </td>
               </tr>
-              <% n +=1 %>
+              <% count +=1 %>
             <% end %>
           <% end %>
         </tbody>
