@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <br>
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+          <tr>
+            <th colspan="2"><h4><%= @event.name %></h4></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Name</th>
+            <td><%= @event.name %></td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td><%= @event.description %></td>
+          </tr>
+          <tr>
+            <th>Event Date</th>
+            <td><%= @event.event_date %></td>
+          </tr>
+          <tr>
+            <th>Category</th>
+            <td><%= @event.category.category_name %></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="row">
+        <div class="col-12">
+          <%= link_to "Back", events_path, class:"btn btn-sm btn-danger float-right" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-3"></div>
+  </div>
+
+</div>

@@ -1,0 +1,23 @@
+<div class="modal fade" id="addcomment">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+    
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"><%= @event.name %></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+      <!-- Modal body -->
+      <div class="modal-body">
+        <%= form_with url: add_comments_path(@event.id), method: :get do |form| %>
+          <div class="form-group">
+            <%= form.text_area :comment, class:"form-control", placeholder:"write your comment...", rows:5, name:"comment[commenttext]" %>
+          </div>
+          <%= form.submit value:"comment", class:"btn btn-sm btn-success float-right" %>
+          <% end %>
+      </div>
+      
+    </div>
+  </div>
+</div>

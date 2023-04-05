@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
-  http_basic_authenticate_with name: 'user', password: '123'
+  # http_basic_authenticate_with name: 'user', password: '123'
 
   def index
-    return unless logged_in?
+    # return unless logged_in?
 
-    flash[:notice] = 'You are already logged in.'
-    redirect_to cars_path
+    # flash[:notice] = 'You are already logged in.'
+    # redirect_to cars_path
   end
 
   def create
@@ -14,15 +14,15 @@ class UsersController < ApplicationController
       session[:current_user_id] = @user[:id]
       flash[:notice] = 'You have successfully logged in.'
       cookies[:user_name] = @user[:username]
-      redirect_to cars_path
     else
       flash[:notice] = 'Invalid username & password.'
-      redirect_to users_path
     end
+    redirect_to users_path
   end
 
   def logout
     session.delete(:current_user_id)
+    cookies.delete(:user_name)
     flash[:notice] = 'You have successfully logged out.'
     redirect_to users_path
   end

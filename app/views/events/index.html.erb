@@ -1,0 +1,70 @@
+<div class="container-fluid text-center">
+  <br>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+
+      <div class="row">
+        <div class="mx-auto">
+          <%= form_with url: event_search_path, method: :get do |form| %>
+            <div class="form-group row">
+              <div class="col-10">
+                <%= form.select :category_id, @categories.map { |c| [c.category_name, c.id]}, {}, class: "form-control"%>
+              </div>
+              <div class="col-2">
+                <%= form.submit "Filter by category", class:"btn btn-info" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <br>
+
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th colspan="5"><h3>List of Events</h3></th>
+          </tr>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Event Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% n = 1 %>
+          <% @events.each do |event| %>
+            <tr>
+              <td><%= n %></td>
+              <td><%= event.name %></td>
+              <td><%= event.category.category_name %></td>
+              <td><%= event.event_date %></td>
+              <td>
+                <%= link_to "Comments", show_comments_path(event.id), class:"btn btn-dark btn-sm" %>
+                &nbsp;&nbsp;
+                <%= link_to "View", event_path(event), class:"btn btn-success btn-sm" %>
+                &nbsp;&nbsp;
+                <%= link_to "Edit", edit_event_path(event), class:"btn btn-warning btn-sm" %>
+                &nbsp;&nbsp;
+                <%= link_to "Destroy", event_path(event), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"btn btn-danger btn-sm" %>
+              </td>
+            </tr>
+            <% n +=1 %>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col-6"> 
+          <%= link_to "Back", users_path, class:"btn btn-danger btn-sm float-left" %>
+          <%= link_to "Add new Event", new_event_path, class:"btn btn-primary btn-sm float-left" %>
+        </div>
+        <div class="col-6"> 
+          <%= link_to "All events...", events_path, class:"float-right" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>

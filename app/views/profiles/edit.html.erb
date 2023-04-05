@@ -1,0 +1,40 @@
+<div class="container-fluid">
+
+  <h2 class="text-center">Update Informations</h2>
+  <h3 class="text-center">(<%= @profile.firstname %>)</h3>
+
+  <div class="row">
+    <div class="col-3">
+    </div>
+    <div class="col-6">
+      <%= form_with model: @profile do |form| %>
+        <div class="form-group">
+          <%= form.label :firstname %>
+          <%= form.text_field :firstname, class:"form-control", placeholder:"Enter firstname" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :lastname %>
+          <%= form.text_field :lastname, class:"form-control", placeholder:"Enter lastname" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :phonenumber %>
+          <%= form.text_field :phonenumber, class:"form-control", placeholder:"Enter Phonenumber" %>
+        </div>
+        
+        <div class="row">
+          <div class="col-6">
+            <%= form.submit value:"Update Profile", class:"btn btn-sm btn-success float-left" %>
+          </div>
+          <div class="col-6">
+            <%= link_to "Back", profiles_path, class:"btn btn-sm btn-danger float-right" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-3">
+    </div>
+  </div>
+  
+</div>

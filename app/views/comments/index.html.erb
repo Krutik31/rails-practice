@@ -1,0 +1,51 @@
+<div class="container-fluid text-center">
+  <br>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>
+              <div class="row">
+                <div class="col-10 h4 text-left">
+                  <%= @event.name %>
+                </div>
+                <div class="col-2">
+                  <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#addcomment">
+                    Add comment
+                  </button>
+                </div>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @comments.each do |comment| %>
+            <tr>
+              <td class="text-left">
+                  <strong>User:</strong> <%= comment.user.username.titleize %>
+                  <br>
+                  <strong>At:</strong> <%= comment.created_at %>
+                  <br>
+                  <strong>Comment:</strong> <%= comment.comment %>
+                  <br>
+                  <% like_counts = comment.likes.count %>
+                  <% if liked_comment?(comment.id, current_user) %>
+                    <%= link_to "Liked (#{like_counts})", unlike_comments_path(comment.id) %>
+                  <% else %>
+                    <%= link_to "Like (#{like_counts})", like_comments_path(comment.id) %>
+                  <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%= render partial: "modal" %>
+
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>
