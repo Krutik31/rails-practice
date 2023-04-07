@@ -33,7 +33,7 @@ class EventsController < ApplicationController
   end
 
   def search
-    @events = @events.where(category_id: params[:category_id])
+    @events = @events.select { |e| e.category_id == params[:category_id].to_i }
     render :index
   end
 

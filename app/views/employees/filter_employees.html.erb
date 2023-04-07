@@ -1,0 +1,55 @@
+<div class="container-fluid text-center">
+  <br>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <h1 class="font-weight-bold text-primary">Filter Employees</h1>
+      <%= link_to "Back", get_all_employees_path, class:"btn btn-danger btn-sm" %>
+      <hr>
+
+      <div class="row">
+        <div class="mx-auto">
+          <%= form_with url: filter_employees_path, method: :get do |form| %>
+            <div class="form-group row">
+              <div class="col-10">
+                <%= form.select :task, Employee::FILTERS, {}, {class: "form-control"} %>
+              </div>
+              <div class="col-2">
+                <%= form.submit "Apply filter", class:"btn btn-info", name: nil %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <hr>
+
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>No. of Orders</th>
+            <th>Full Time Available</th>
+            <th>Salary</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @employees.each do |employee| %>
+            <tr>
+              <td><%= employee.id %></td>
+              <td><%= employee.first_name %> <%= employee.last_name %></td>
+              <td><%= employee.email %></td>
+              <td><%= employee.age %></td>
+              <td><%= employee.no_of_order %></td>
+              <td><%= employee.full_time_available ? 'Yes' : 'No' %></td>
+              <td><%= employee.salary %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>

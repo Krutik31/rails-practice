@@ -33,9 +33,11 @@
                   <br>
                   <% like_counts = comment.likes.count %>
                   <% if liked_comment?(comment.id, current_user) %>
-                    <%= link_to "Liked (#{like_counts})", unlike_comments_path(comment.id) %>
+                    <%= link_to raw('<i class="fa-solid fa-thumbs-up fa-lg"></i>'), unlike_comments_path(comment.id), :class => "btn float-left py-0", title: "Liked" %>
+                    <%= "(#{like_counts} likes)" %>
                   <% else %>
-                    <%= link_to "Like (#{like_counts})", like_comments_path(comment.id) %>
+                    <%= link_to raw('<i class="fa-regular fa-thumbs-up fa-lg"></i>'), like_comments_path(comment.id), :class => "btn float-left py-0", title: "Like" %>
+                    <%= "(#{like_counts} likes)" %>
                   <% end %>
               </td>
             </tr>
