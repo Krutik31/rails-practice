@@ -1,0 +1,31 @@
+<div class="container-fluid">
+
+  <h2 class="text-center">Add New Customer</h2>
+
+  <div class="row">
+    <div class="col-3">
+    </div>
+    <div class="col-6">
+
+    <% if @customer.errors.any? %>
+      <hr>
+      
+      <div style="color:red;">
+        <h5><%= @customer.errors.count %> errors found.</h5>
+        <ul>
+          <% @customer.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+      <hr>
+      <%= render partial: "form", locals: { customer: @customer, submit_btn: "Create Customer" } %>
+      
+    </div>
+    <div class="col-3">
+    </div>
+  </div>
+    
+</div>

@@ -1,0 +1,118 @@
+<div class="container-fluid">
+  <br>
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+          <tr>
+            <th colspan="2"><h4>Order #<%= @order.id %></h4></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Quantity</th>
+            <td><%= @order.quantity %></td>
+          </tr>
+          <tr>
+            <th>Amount</th>
+            <td><%= @order.total_amount %></td>
+          </tr>
+          <tr>
+            <th>Order status</th>
+            <td>
+              <% status = @order.order_status %>
+              <% if (status == 'booked') %>
+                <span class="badge badge-success">Booked</span>
+              <% elsif (status == 'cancelled') %>
+                <span class="badge badge-danger">Cancelled</span>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>Date</th>
+            <td><%= @order.created_at %></td>
+          </tr>
+        </tbody>
+      </table>
+    
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+          <tr>
+            <th colspan="2"><h4>Customer Details</h4></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Firstname</th>
+            <td><%= @customer.first_name %></td>
+          </tr>
+          <tr>
+            <th>Lastname</th>
+            <td><%= @customer.last_name %></td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td><%= @customer.email %></td>
+          </tr>
+          <tr>
+            <th>Phonenumber</th>
+            <td><%= @customer.phone_number %></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+          <tr>
+            <th colspan="2"><h4>Product Details</h4></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Title</th>
+            <td><%= @item.title %></td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td><%= @item.description %></td>
+          </tr>
+          <tr>
+            <th>Price</th>
+            <td><%= @item.price %></td>
+          </tr>
+          <tr>
+            <th>Capacity</th>
+            <td><%= @item.capacity %></td>
+          </tr>
+          <tr>
+            <th>Active</th>
+            <td><%= @item.is_active ? 'Yes' : 'No' %></td>
+          </tr>
+          <tr>
+            <th>Product Status</th>
+            <td>
+              <% status = @item.product_status %>
+              <% if (status == 0) %>
+                <span class="badge badge-success">In stock</span>
+              <% elsif (status == 1) %>
+                <span class="badge badge-danger">Out of stock</span>
+              <% elsif (status == 2) %>
+                <span class="badge badge-info">Coming soon</span>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="row">
+        <div class="col-12">
+          <%= link_to "Back", orders_path, class:"btn btn-sm btn-danger float-right" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-3"></div>
+  </div>
+
+</div>
