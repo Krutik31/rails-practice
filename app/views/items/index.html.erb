@@ -1,0 +1,88 @@
+<div class="container-fluid text-center">
+  <br>
+  
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+
+      <div class="row">
+        <div class="col-3">
+          <%= link_to "most sales product by quantity...", customer_task_path(1), class:"btn btn-sm btn-dark" %>
+        </div>
+        <div class="col-3">
+          <%= link_to "most sales product by price...", customer_task_path(2), class:"btn btn-sm btn-dark" %>
+        </div>
+        <div class="col-3">
+          <%= link_to "most booked order of product...", customer_task_path(3), class:"btn btn-sm btn-dark" %>
+        </div>
+        <div class="col-3">
+          <%= link_to "most canceled order of product...", customer_task_path(4), class:"btn btn-sm btn-dark" %>
+        </div>
+      </div>
+      <hr>
+      
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th colspan="7"><h3>List of Items</h3></th>
+          </tr>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Is active</th>
+            <th>Total Orders</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+            <tr>
+              <td><%= item.id %></td>
+              <td><%= item.title %></td>
+              <td><%= item.price %></td>
+              <td>
+                <% status = item.product_status %>
+                <% if (status == 0) %>
+                  <span class="badge badge-success">In stock</span>
+                <% elsif (status == 1) %>
+                  <span class="badge badge-danger">Out of stock</span>
+                <% elsif (status == 2) %>
+                  <span class="badge badge-info">Coming soon</span>
+                <% end %>
+              </td>
+              <td><%= item.is_active ? 'Yes' : 'No' %></td>
+              <td><%= item.orders.count %></td>
+              <td>
+                <%= link_to "View", item_path(item), class:"btn btn-success btn-sm" %>
+                &nbsp;&nbsp;
+                <%= link_to "Edit", edit_item_path(item), class:"btn btn-warning btn-sm" %>
+                &nbsp;&nbsp;
+                <%= link_to "Destroy", item_path(item), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"btn btn-danger btn-sm" %>
+                &nbsp;&nbsp;
+                <%= link_to "Order item", order_item_path(item.id), class:"btn btn-info btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="row col-12 justify-content-center">
+          <%= link_to "Customers", customers_path, class:"btn btn-dark btn-sm" %>
+          &nbsp;&nbsp;
+          <%= link_to "Add new Item", new_item_path, class:"btn btn-primary btn-sm float-left" %>
+          &nbsp;&nbsp;
+          <%= link_to "Orders", orders_path, class:"btn btn-dark btn-sm" %>
+      </div> 
+      <div class="row">
+        <div class="col-12">
+          <%= link_to "All items...", items_path, class:"float-left" %>
+          <%= link_to "Active items...", active_items_path, class:"float-right" %>
+        </div>
+      </div>
+      <hr>
+      
+      </div>
+    <div class="col-2"></div>
+  </div>
+</div>

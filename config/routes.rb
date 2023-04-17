@@ -34,4 +34,15 @@ Rails.application.routes.draw do
   get '/event/addcomment/:id', to: 'comments#add_comment', as: 'add_comments'
   get '/event/likecomment/:id', to: 'comments#like_comment', as: 'like_comments'
   get '/event/unlikecomment/:id', to: 'comments#unlike_comment', as: 'unlike_comments'
+
+  get '/items/active', to: 'items#active_items', as: 'active_items'
+  resources :items
+
+  get 'customer/task/:id', to: 'customers#task', as: 'customer_task'
+  resources :customers, except: %i[show]
+
+  get 'item/order/:id', to: 'orders#new', as: 'order_item'
+  get '/order/filter', to: 'orders#filter_orders', as: 'filter_orders'
+  get '/order/search', to: 'orders#search', as: 'search_by_product'
+  resources :orders, except: %i[new]
 end
