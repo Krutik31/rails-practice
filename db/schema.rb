@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_07_052133) do
+
+ActiveRecord::Schema[7.0].define(version: 2023_04_13_063746) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -82,6 +83,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_052133) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "lock_version"
+
+  create_table "customers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.bigint "phone_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "enrollments", force: :cascade do |t|
@@ -118,6 +127,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_052133) do
     t.integer "update_counter", default: 0
   end
 
+  create_table "items", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.bigint "price"
+    t.string "capacity"
+    t.boolean "is_active"
+    t.integer "product_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "likes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "comment_id", null: false
@@ -125,6 +145,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_052133) do
     t.datetime "updated_at", null: false
     t.index ["comment_id"], name: "index_likes_on_comment_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "total_amount"
+    t.string "order_status"
+    t.bigint "item_id", null: false
+    t.bigint "customer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["item_id"], name: "index_orders_on_item_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -176,5 +208,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_052133) do
   add_foreign_key "events", "categories"
   add_foreign_key "likes", "comments"
   add_foreign_key "likes", "users"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "items"
   add_foreign_key "profiles", "users"
 end

@@ -40,4 +40,15 @@ Rails.application.routes.draw do
   get '/employee/search', to: 'employees#search', as: 'search_by_email'
   get '/employee/change_order/:order/:id', to: 'employees#change_order', as: 'change_order_numbers'
   get '/filter', to: 'employees#filter_employees', as: 'filter_employees'
+
+  get '/items/active', to: 'items#active_items', as: 'active_items'
+  resources :items
+
+  get 'customer/task/:id', to: 'customers#task', as: 'customer_task'
+  resources :customers, except: %i[show]
+
+  get 'item/order/:id', to: 'orders#new', as: 'order_item'
+  get '/order/filter', to: 'orders#filter_orders', as: 'filter_orders'
+  get '/order/search', to: 'orders#search', as: 'search_by_product'
+  resources :orders, except: %i[new]
 end

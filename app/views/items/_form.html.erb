@@ -1,0 +1,43 @@
+<%= form_with model: item do |form| %>
+  <div class="form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title, class:"form-control", placeholder:"Enter product title" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, class:"form-control", placeholder:"write product description...", rows:4 %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :price %>
+    <%= form.number_field :price, class:"form-control", placeholder:"Enter price" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :capacity %>
+    <%= form.number_field :capacity, class:"form-control", placeholder:"Enter capacity" %>
+  </div>
+
+  <div class="form-group">
+    Active: 
+    <%= form.radio_button :is_active, "true" %>
+    <%= form.label :is_active_true, "Yes" %>
+    <%= form.radio_button :is_active, "false" %>
+    <%= form.label :is_active_false, "No" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :product_status %>
+    <%= form.select :product_status, Item::statuses, {include_blank: 'Select status'}, {class: "form-control"}%>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <%= form.submit value:"#{submit_btn}", class:"btn btn-sm btn-success float-left" %>
+    </div>
+    <div class="col-6">
+      <%= link_to "Back", items_path, class:"btn btn-sm btn-danger float-right" %>
+    </div>
+  </div>
+<% end %>

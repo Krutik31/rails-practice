@@ -1,0 +1,89 @@
+<div class="container-fluid text-center">
+  <br>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+
+      <div class="row">
+        <div class="col-3">
+          <%= link_to "most sales product by quantity...", customer_task_path(1), class:"btn btn-sm btn-dark" %>
+        </div>
+        <div class="col-3">
+          <%= link_to "most sales product by price...", customer_task_path(2), class:"btn btn-sm btn-dark" %>
+        </div>
+        <div class="col-3">
+          <%= link_to "most booked order of product...", customer_task_path(3), class:"btn btn-sm btn-dark" %>
+        </div>
+        <div class="col-3">
+          <%= link_to "most canceled order of product...", customer_task_path(4), class:"btn btn-sm btn-dark" %>
+        </div>
+      </div>
+      <hr>
+
+      <div class="row"> 
+        <%= form_with url: search_by_product_path, method: :get, class: "form-inline col-6 justify-content-end" do |form| %> 
+          <div class="input-group mb-3"> 
+            <%= form.text_field :pname, class:"form-control mr-sm-2", placeholder:"Search by productname" %>
+            <%= form.submit "Search", class:"btn btn-primary my-2 my-sm-0", name: nil %>
+          </div> 
+        <% end %> 
+        <%= form_with url: filter_orders_path, method: :get, class: "form-inline col-6" do |form| %> 
+          <div class="input-group mb-3"> 
+            <%= form.select :task, Order::FILTERS, {}, {class: "form-control mr-sm-2"} %>
+            <%= form.submit "Apply filter", class:"btn btn-info my-2 my-sm-0", name: nil %>
+          </div> 
+        <% end %>
+      </div>
+
+     
+
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th colspan="7"><h3>List of Orders</h3> <%= link_to "(get all orders...)", orders_path %></th>
+          </tr>
+          <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Status</th>
+            <th>Total Amount</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= order.id %></td>
+              <td><%= order.customer.first_name %> <%= order.customer.last_name %></td>
+              <td><%= item_title(order.item_id) %></td>
+              <td>
+                <% status = order.order_status %>
+                <% if (status == 'booked') %>
+                  <span class="badge badge-success">Booked</span>
+                <% elsif (status == 'cancelled') %>
+                  <span class="badge badge-danger">Cancelled</span>
+                <% end %>
+              </td>
+              <td><%= order.total_amount %></td>
+              <td>
+                <%= link_to "View", order_path(order), class:"btn btn-success btn-sm" %>
+                &nbsp;&nbsp;
+                <%= link_to "Edit", edit_order_path(order), class:"btn btn-warning btn-sm" %>
+                &nbsp;&nbsp;
+                <%= link_to "Remove", order_path(order), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"btn btn-danger btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="row col-12 justify-content-center">
+          <%= link_to "Items", items_path, class:"btn btn-dark btn-sm" %>
+          &nbsp;&nbsp;
+          <%= link_to "Customers", customers_path, class:"btn btn-dark btn-sm" %>
+      </div> 
+      
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>
