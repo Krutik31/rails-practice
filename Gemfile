@@ -13,6 +13,9 @@ gem 'sprockets-rails'
 gem 'prawn'
 gem 'prawn-table', '~> 0.1.0'
 
+# Use Pry gem for debugging.
+gem 'pry'
+
 # Use postgrees as the database for Active Record
 gem 'pg'
 

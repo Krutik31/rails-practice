@@ -40,3 +40,8 @@ end
   Order.find_or_create_by(id: ord + 1, quantity: rand(1..25), order_status: %w[booked cancelled].sample,
                           item_id: itemid, customer_id: rand(1..10))
 end
+
+20.times do |em|
+  Employee.find_or_create_by(id: em + 1, first_name: "John#{em}", last_name: "Doe#{em}", email: "john#{em}@gmail.com",
+                             age: rand(18..60), no_of_order: rand(0..20), full_time_available: rand(0..1), salary: rand(30..100) * 1000)
+end

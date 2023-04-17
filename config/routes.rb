@@ -35,6 +35,12 @@ Rails.application.routes.draw do
   get '/event/likecomment/:id', to: 'comments#like_comment', as: 'like_comments'
   get '/event/unlikecomment/:id', to: 'comments#unlike_comment', as: 'unlike_comments'
 
+  resources :employees
+  get '/all', to: 'employees#all_employees', as: 'get_all_employees'
+  get '/employee/search', to: 'employees#search', as: 'search_by_email'
+  get '/employee/change_order/:order/:id', to: 'employees#change_order', as: 'change_order_numbers'
+  get '/filter', to: 'employees#filter_employees', as: 'filter_employees'
+
   get '/items/active', to: 'items#active_items', as: 'active_items'
   resources :items
 

@@ -1,0 +1,85 @@
+<div class="container-fluid text-center">
+  <br>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+
+      <br>
+      <div class="w-50 bg-dark mx-auto text-light">
+        <%=flash[:notice]%>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="mx-auto">
+          <%= form_with url: search_by_email_path, method: :get do |form| %>
+            <%= form.text_field :emailsearch, placeholder:"Enter email address..."  %>
+            <%= form.submit "Search", class:"btn btn-sm btn-success" %>
+          <% end %>
+        </div>
+      </div>
+      <br>
+
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th colspan="5">
+              <div class="row">
+                <div class="col-2">
+                  <%= link_to "Back", employees_path, class:"btn btn-danger btn-sm float-left" %>
+                </div>
+                <div class="col-8">
+                  <h3>List of Employees</h3>
+                  <p><%= link_to "apply filters...", "/filter?task=0" %></p>
+                </div>
+                <div class="col-2">
+                  <%= link_to "Add new Employee", new_employee_path, class:"btn btn-primary btn-sm float-left" %>
+                </div>
+              </div>
+            </th>
+          </tr>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>No. of Orders</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @employees.each do |employee| %>
+            <tr>
+              <td><%= employee.id %></td>
+              <td><%= employee.first_name %> <%= employee.last_name %></td>
+              <td>
+                <div class="row">
+                  <div class="col-5 px-0">
+                    <%= link_to raw('<i class="fa-solid fa-circle-minus fa-xl"></i>'), change_order_numbers_path('dec',employee), :class => "btn float-right", title: "Decrease" %>  
+                  </div>
+                  <div class="col-2 m-auto">
+                    <%= employee.no_of_order %>
+                  </div>
+                  <div class="col-5 px-0">
+                    <%= link_to raw('<i class="fa-solid fa-circle-plus fa-xl"></i>'), change_order_numbers_path('inc', employee), :class => "btn float-left", title: "Increase" %>
+                  </div>
+                </div>
+              </td>
+              <td><%= employee.email %></td>
+              <td>
+                <%= link_to "View", employee_path(employee), class:"btn btn-success btn-sm" %>
+                &nbsp;&nbsp;
+                <%= link_to "Edit", edit_employee_path(employee), class:"btn btn-warning btn-sm" %>
+                &nbsp;&nbsp;
+                <%= link_to "Destroy", employee_path(employee), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"btn btn-danger btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="row col-12 justify-content-center"> 
+        
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>
