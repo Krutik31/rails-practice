@@ -1,0 +1,80 @@
+<div class="container-fluid text-center">
+  <br>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+
+      <div class="row">
+        <div class="col-3">
+          <%= link_to "most sales product by quantity...", business_customer_task_path(1), class:"btn btn-sm btn-dark" %>
+        </div>
+        <div class="col-3">
+          <%= link_to "most sales product by price...", business_customer_task_path(2), class:"btn btn-sm btn-dark" %>
+        </div>
+        <div class="col-3">
+          <%= link_to "most booked order of product...", business_customer_task_path(3), class:"btn btn-sm btn-dark" %>
+        </div>
+        <div class="col-3">
+          <%= link_to "most canceled order of product...", business_customer_task_path(4), class:"btn btn-sm btn-dark" %>
+        </div>
+      </div>
+      <hr>
+
+      <div class="row"> 
+        <%= form_with url: search_business_customers_path, method: :get, class: "form-inline col-12 justify-content-center" do |form| %> 
+          <div class="input-group mb-3"> 
+            <%= form.text_field :cname, class:"form-control mr-sm-2", placeholder:"Search by firstname" %>
+            <%= form.submit "Search", class:"btn btn-primary my-2 my-sm-0", name: nil %>
+          </div> 
+        <% end %>
+      </div>
+
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th colspan="6"><h3>List of Customers</h3><%= link_to "get all customers...", business_customers_path %></th>
+          </tr>
+          <tr>
+            <th>ID</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Phone number</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @customers.each do |customer| %>
+            <tr>
+              <td><%= customer.id %></td>
+              <td><%= customer.first_name %></td>
+              <td><%= customer.last_name %></td>
+              <td><%= customer.email %></td>
+              <td><%= customer.phone_number %></td>
+              <td>
+                <%= link_to "Preview", business_customer_preview_path(customer.id), class:"btn btn-info btn-sm" %>
+                &nbsp;&nbsp;
+                <%= link_to "Edit", edit_business_customer_path(customer), class:"btn btn-warning btn-sm" %>
+                &nbsp;&nbsp;
+                <%= link_to "Destroy", business_customer_delete_customer_path(customer.id), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"btn btn-danger btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="row col-12 justify-content-center">
+          <%= link_to "Items", items_path, class:"btn btn-dark btn-sm" %>
+          &nbsp;&nbsp;
+          <%= link_to "Add new Customer", new_business_customer_path, class:"btn btn-primary btn-sm float-left" %>
+          &nbsp;&nbsp;
+          <%= link_to "All orders", orders_path, class:"btn btn-dark btn-sm" %>
+      </div> <br>
+      <div class="row col-12 justify-content-center">
+          <%= link_to "API-V1", api_v1_items_path, class:"btn btn-secondary btn-sm" %>
+      </div> 
+      <hr>
+
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>

@@ -5,7 +5,9 @@ class ItemsController < ApplicationController
     @items = Item.unscoped.all.order(id: :asc)
   end
 
-  def show; end
+  def show
+    @orders = @item.orders
+  end
 
   def new
     @item = Item.unscoped.new

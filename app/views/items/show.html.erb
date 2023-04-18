@@ -46,6 +46,39 @@
         </tbody>
       </table>
 
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+          <tr>
+            <th colspan="7"><h3>Orders of <%= @item.title %></h3></th>
+          </tr>
+          <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Status</th>
+            <th>Quantity X Price = Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= order.id %></td>
+              <td><%= order.customer.first_name %> <%= order.customer.last_name %></td>
+              <td>
+                <% status = order.order_status %>
+                <% if (status == 'booked') %>
+                  <span class="badge badge-success">Booked</span>
+                <% elsif (status == 'cancelled') %>
+                  <span class="badge badge-danger">Cancelled</span>
+                <% end %>
+              </td>
+              <td><%= order.quantity %> X <%= @item.price %> = <%= order.total_amount %></td>
+              <td><%= order.created_at %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
       <div class="row">
         <div class="col-12">
           <%= link_to "Back", items_path, class:"btn btn-sm btn-danger float-right" %>

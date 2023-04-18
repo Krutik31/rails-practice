@@ -1,0 +1,48 @@
+<div class="container-fluid text-center">
+  <br>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th colspan="7"><h3>Orders of <%= @item.title %></h3></th>
+          </tr>
+          <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Status</th>
+            <th>Quantity X Price = Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= order.id %></td>
+              <td><%= order.customer.first_name %> <%= order.customer.last_name %></td>
+              <td>
+                <% status = order.order_status %>
+                <% if (status == 'booked') %>
+                  <span class="badge badge-success">Booked</span>
+                <% elsif (status == 'cancelled') %>
+                  <span class="badge badge-danger">Cancelled</span>
+                <% end %>
+              </td>
+              <td><%= order.quantity %> X <%= @item.price %> = <%= order.total_amount %></td>
+              <td><%= order.created_at %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="row col-12 justify-content-center">
+          <%= link_to "Items", items_path, class:"btn btn-dark btn-sm" %>
+          &nbsp;&nbsp;
+          <%= link_to "Customers", business_customers_path, class:"btn btn-dark btn-sm" %>
+      </div>
+      
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>

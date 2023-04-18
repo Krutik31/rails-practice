@@ -7,16 +7,16 @@
 
       <div class="row">
         <div class="col-3">
-          <%= link_to "most sales product by quantity...", customer_task_path(1), class:"btn btn-sm btn-dark" %>
+          <%= link_to "most sales product by quantity...", business_customer_task_path(1), class:"btn btn-sm btn-dark" %>
         </div>
         <div class="col-3">
-          <%= link_to "most sales product by price...", customer_task_path(2), class:"btn btn-sm btn-dark" %>
+          <%= link_to "most sales product by price...", business_customer_task_path(2), class:"btn btn-sm btn-dark" %>
         </div>
         <div class="col-3">
-          <%= link_to "most booked order of product...", customer_task_path(3), class:"btn btn-sm btn-dark" %>
+          <%= link_to "most booked order of product...", business_customer_task_path(3), class:"btn btn-sm btn-dark" %>
         </div>
         <div class="col-3">
-          <%= link_to "most canceled order of product...", customer_task_path(4), class:"btn btn-sm btn-dark" %>
+          <%= link_to "most canceled order of product...", business_customer_task_path(4), class:"btn btn-sm btn-dark" %>
         </div>
       </div>
       <hr>
@@ -61,18 +61,23 @@
                 &nbsp;&nbsp;
                 <%= link_to "Destroy", item_path(item), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"btn btn-danger btn-sm" %>
                 &nbsp;&nbsp;
-                <%= link_to "Order item", order_item_path(item.id), class:"btn btn-info btn-sm" %>
+                <%= link_to "Order item", item_order_path(item.id), class:"btn btn-info btn-sm" %>
+                &nbsp;&nbsp;
+                <%= link_to "Orders", item_orders_path(item.id), class:"btn btn-dark btn-sm" %>
               </td>
             </tr>
           <% end %>
         </tbody>
       </table>
       <div class="row col-12 justify-content-center">
-          <%= link_to "Customers", customers_path, class:"btn btn-dark btn-sm" %>
+          <%= link_to "Customers", business_customers_path, class:"btn btn-dark btn-sm" %>
           &nbsp;&nbsp;
           <%= link_to "Add new Item", new_item_path, class:"btn btn-primary btn-sm float-left" %>
           &nbsp;&nbsp;
-          <%= link_to "Orders", orders_path, class:"btn btn-dark btn-sm" %>
+          <%= link_to "All orders", orders_path, class:"btn btn-dark btn-sm" %>
+      </div> <br>
+      <div class="row col-12 justify-content-center">
+          <%= link_to "API-V1", api_v1_customers_path, class:"btn btn-secondary btn-sm" %>
       </div> 
       <div class="row">
         <div class="col-12">
