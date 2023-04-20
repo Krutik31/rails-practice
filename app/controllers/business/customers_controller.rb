@@ -1,12 +1,13 @@
 module Business
   class CustomersController < ApplicationController
+    before_action :custom_fetching_of_customers, only: %i[preview delete_customer]
+    before_action :fetching_customers, only: %i[show update]
+
     def index
       @customers = Customer.all.order(id: :asc)
     end
 
-    def preview
-      @customer = Customer.find(params[:customer_id])
-    end
+    def preview; end
 
     def new
       @customer = Customer.new
@@ -22,13 +23,9 @@ module Business
       end
     end
 
-    def edit
-      @customer = Customer.find(params[:id])
-    end
+    def edit; end
 
     def update
-      @customer = Customer.find(params[:id])
-
       if @customer.update(customer_params)
         redirect_to business_customers_path
       else
@@ -37,7 +34,6 @@ module Business
     end
 
     def delete_customer
-      @customer = Customer.find(params[:customer_id])
       @customer.destroy
 
       redirect_to business_customers_path
@@ -61,11 +57,19 @@ module Business
     end
 
     def search
-      @customers = Customer.where("first_name LIKE '%#{params[:cname]}%'")
+      @customers = Customer.where('first_name LIKE ?', '%' + params[:cname] + '%')
       render :index
     end
 
     private
+
+    def custom_fetching_of_customers
+      @customer = Customer.find(params[:customer_id])
+    end
+
+    def fetching_customers
+      @customer = Customer.find(params[:id])
+    end
 
     def customer_params
       params.require(:customer).permit(:first_name, :last_name, :email, :phone_number)
