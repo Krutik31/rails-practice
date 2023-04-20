@@ -2,13 +2,15 @@ class ItemsController < ApplicationController
   before_action :fetch_item, only: %i[show edit update destroy]
 
   def index
-    @items = Item.unscoped.all.order(id: :asc)
+    @items = unscoped_flag.all.order(id: :asc)
   end
 
-  def show; end
+  def show
+    @orders = @item.orders
+  end
 
   def new
-    @item = Item.unscoped.new
+    @item = unscoped_flag.new
   end
 
   def create
@@ -45,7 +47,11 @@ class ItemsController < ApplicationController
   private
 
   def fetch_item
-    @item = Item.unscoped.find(params[:id])
+    @item = unscoped_flag.find(params[:id])
+  end
+
+  def unscoped_flag
+    Item.unscoped
   end
 
   def item_params

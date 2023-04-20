@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @itemid = Item.unscoped.find(params[:id]).id
+    @itemid = params[:item_id]
     @customers = Customer.all
   end
 
@@ -72,6 +72,11 @@ class OrdersController < ApplicationController
 
     @orders = item.orders
     render :index
+  end
+
+  def orders_by_product
+    @item = Item.unscoped.find(params[:item_id])
+    @orders = Order.where(item_id: params[:item_id])
   end
 
   private

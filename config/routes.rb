@@ -42,13 +42,17 @@ Rails.application.routes.draw do
   get '/filter', to: 'employees#filter_employees', as: 'filter_employees'
 
   get '/items/active', to: 'items#active_items', as: 'active_items'
-  resources :items
+  resources :items do
+    get '/orders', to: 'orders#orders_by_product', as: 'orders'
+    get '/order/new', to: 'orders#new', as: 'order'
+  end
+  root 'items#index'
 
-  get 'customer/task/:id', to: 'customers#task', as: 'customer_task'
-  resources :customers, except: %i[show]
+  draw(:business)
 
-  get 'item/order/:id', to: 'orders#new', as: 'order_item'
   get '/order/filter', to: 'orders#filter_orders', as: 'filter_orders'
   get '/order/search', to: 'orders#search', as: 'search_by_product'
   resources :orders, except: %i[new]
+
+  draw(:api)
 end
